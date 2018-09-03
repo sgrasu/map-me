@@ -15,8 +15,10 @@ class App extends Component {
   render() {
     return (
       <div class='App col12 pad4 contain fill-navy dark clip'>
-        <div class=' col8 center quiet'>
-          <Map style="mapbox://styles/mapbox/streets-v9"
+        <div className='sidebar pad2'>Listing</div>
+        <div id='map' className='map pad2'>
+          <Map
+            style="mapbox://styles/mapbox/streets-v9"
             containerStyle={{
               height: "100vh",
               width: "100vw"
@@ -27,14 +29,7 @@ class App extends Component {
               layout={{ "icon-image": "marker-15" }}>
               <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
             </Layer>
-          </Map>
-        </div>
-        <div class='pin-right pad2'>
-          <a href='#step-3' class='button'>Trigger</a>
-        </div>
-        <div id='step-3' class='col4 pad2 fill-darken1 pin-left offcanvas-left'>
-          Left panel with content
-  </div>
+          </Map></div>
       </div>
     );
   }
