@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
-from server.db_tools import build_db_connection_uri_string
-
+from .db_tools import build_db_connection_uri_string
 import os
 
 app = Flask(__name__, static_folder="../static/build/static", template_folder="../static/build")
@@ -15,7 +14,11 @@ print('EV OPTS: ' + (os.environ.get('SWE_IDB_PGDB_OPTS') or 'NONE'))
 print('EV ADDR: ' + (os.environ.get('SWE_IDB_PGDB_ADDR') or 'NONE'))
 print('EV PW: ' + (os.environ.get('SWE_IDB_PGDB_PW') or 'NONE'))
 
+
 db = SQLAlchemy(app)
+from .models import Brewery
+db.create_all()
+db.session.commit()
 @app.route("/")
 def index():
     return render_template("index.html")

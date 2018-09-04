@@ -10,11 +10,11 @@ db_name_evkey = db_envvar_key_prefix + 'NAME'
 db_options_evkey = db_envvar_key_prefix + 'OPTS'
 
 # Define internal defaults
-_db_driver_default = 'pympysql'
-_db_uname_default = 'sgrasu'
-_db_pwrd_default = ''
+_db_driver_default = 'pymysql'
+_db_uname_default = 'root'
+_db_pwrd_default = 'rootpass'
 _db_addr_default = 'localhost:3306'
-_db_name_default = 'mysql'
+_db_name_default = 'brewdb'
 _db_opts_default = ''
 
 
@@ -76,7 +76,7 @@ def build_db_connection_uri_string(driver=None, username=None,
     if db_name is None: db_name = ''
     if db_options is None: db_options = ''
 
-    return ('postgresql+%s://%s:%s@%s/%s%s'
+    return ('mysql+%s://%s:%s@%s/%s%s'
             % (db_driver,
                db_username,
                db_password,
