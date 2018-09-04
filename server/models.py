@@ -18,7 +18,7 @@ class Brewery(db.Model):
     address = Column(TEXT)
     """ The date of birth associated with a given Artist. """
 
-    phone = Column(TEXT)
+    telephone = Column(TEXT)
     """ The date of death associated with a given Artist. """
 
     country = Column(TEXT)
@@ -27,9 +27,9 @@ class Brewery(db.Model):
     state = Column(TEXT)
     """ The country associated with a given Artist. """
 
-    def __init__(self, name, address='',phone='',country='',state=''):
+    def __init__(self, name, address='',telephone='',country='',state=''):
         self.name = name
-        self.phone =phone
+        self.telephone =telephone
         self.address = address
         self.country = country
         self.state = state
@@ -49,7 +49,7 @@ class Brewery(db.Model):
         return "<Artist: {}> {} ({}:{}), {} [Country:{}".format(self.id,
                                 self.name,
                                 self.address,
-                                self.phone,
+                                self.telephone,
                                 self.country,
                                 self.state)
 
@@ -59,7 +59,7 @@ class Brewery(db.Model):
             "id": self.id,
             "name": self.name,
             "address": self.address,
-            "phone": self.phone,
+            "telephone": self.telephone,
             "country": self.country,
             "state": self.state,
         }
