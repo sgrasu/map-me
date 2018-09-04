@@ -1,23 +1,9 @@
-
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, Integer, Date, ForeignKey, Numeric
 from sqlalchemy.dialects.mysql import TEXT
 from sqlalchemy.orm import validates
 from server import db
-
-
-_MEDIA_WORKS_RELATIONSHIP = db.Table('_media_works_relationship',
-                                     Column('medium_id', Integer,
-                                            ForeignKey('medium.id'),
-                                            primary_key=True),
-                                     Column('work_id', Integer,
-                                            ForeignKey('work.id'),
-                                            primary_key=True),
-                                     db.PrimaryKeyConstraint('medium_id',
-                                                             'work_id'))
-""" A Table used to create a many-to-many database relationship
-between Medium instances and Era instances and vice versa. """
-
 
 class Brewery(db.Model):
     """ A Model that houses information on artists. """
@@ -41,6 +27,12 @@ class Brewery(db.Model):
     state = Column(TEXT)
     """ The country associated with a given Artist. """
 
+    def __init__(self, name, address='',phone='',country='',state=''):
+        self.name = name
+        self.phone =phone
+        self.address = address
+        self.country = country
+        self.state = state
     @validates('name', include_removes=True)
     def __validates_name(self, key, name, is_remove):
         """ Validate the Artist.name attribute.
@@ -54,8 +46,7 @@ class Brewery(db.Model):
     def __repr__(self):
         """ Return a formatted String representation
         of a given Artist. """
-        return "<Artist: {}> {} ({}:{}), {} [Country:{}, Image:{}, " \
-               "Bio:{}]".format(self.id,
+        return "<Artist: {}> {} ({}:{}), {} [Country:{}".format(self.id,
                                 self.name,
                                 self.address,
                                 self.phone,
