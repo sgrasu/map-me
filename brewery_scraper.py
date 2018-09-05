@@ -3,7 +3,7 @@ import re
 from server import db
 from server import Brewery
 from bs4 import BeautifulSoup
-
+from geopy.geocoders import Nominatim
 
 # Collect and parse first page
 page = requests.get('https://www.brewersassociation.org/directories/breweries/')
@@ -35,6 +35,11 @@ for country in country_list_items:
             if address2 is not None:
                 props['address'] = props['address'] +' '+ address2.text.split('|')[0]
         props['country'] = country['data-country-id']
+        geolocator = Nominatim(user_agent="brewery-finder")
+        location = geolocator.geocode(props['address'])
+        if location is not None: 
+            props['latitude'] = location.latitude
+            props['longitude'] =location.longitude
         db_brewery = Brewery(**props)
         db.session.add(db_brewery)
         db.session.commit()

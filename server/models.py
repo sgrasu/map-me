@@ -9,25 +9,33 @@ class Brewery(db.Model):
     """ A Model that houses information on artists. """
 
     id = Column(Integer, primary_key=True)
-    """ The unique identifier and primary key for an Artist. """
+    """ The unique identifier and primary key for a brewery. """
 
     name = Column(TEXT, nullable=False)
-    """ The unique name of a given Artist. Every Artist must have
-    a non-empty name. """
+    """ The unique name of a given brewery, every brewery must
+        have a non-null name. """
 
     address = Column(TEXT)
-    """ The date of birth associated with a given Artist. """
+    """ The address associated with a brewery """
 
     telephone = Column(TEXT)
-    """ The date of death associated with a given Artist. """
+    """ The telephone number of a brewery. """
 
     country = Column(TEXT)
-    """ The nationality associated with a given Artist. """
+    """ The country the brewery is located in. """
 
     state = Column(TEXT)
-    """ The country associated with a given Artist. """
+    """ The state associated with the brewery, if applicable. """
+    
+    latitude = Column(Numeric)
+    """ the latitude of the brewery's address """
 
-    def __init__(self, name, address='',telephone='',country='',state=''):
+    longitude = Column(Numeric)
+    """ the longitude of the brewery's address """
+
+
+
+    def __init__(self, name, address='',telephone='',country='',state='', latitude=None, longitude = None):
         self.name = name
         self.telephone =telephone
         self.address = address
@@ -62,4 +70,6 @@ class Brewery(db.Model):
             "telephone": self.telephone,
             "country": self.country,
             "state": self.state,
+            "latitude": self.latitude,
+            "longitude": self.longitude
         }
