@@ -23,5 +23,7 @@ db.session.commit()
 def index():
     return render_template("index.html")
 
+import server.api
+import server.queries
 if __name__ == "__main__":
     app.run()
