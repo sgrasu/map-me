@@ -30,10 +30,10 @@ for country in country_list_items:
         props['address'] = ''
         address1 = brewery.find(class_='address')
         if address1 is not None:
-            props['address'] = address1.text
+            props['address'] = address1.text.split('|')[0]
             address2 = address1.find_next_sibling('li')
             if address2 is not None:
-                props['address'] = address1.text +' '+ address2.text
+                props['address'] = props['address'] +' '+ address2.text.split('|')[0]
         props['country'] = country['data-country-id']
         db_brewery = Brewery(**props)
         db.session.add(db_brewery)
