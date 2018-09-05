@@ -23,7 +23,7 @@ for country in country_list_items:
     breweries = country_breweries_soup.find_all('ul',class_="brewery-info")
 
     for brewery in breweries:
-        ids = ['name','telephone','country','state']
+        ids = ['name','telephone','state']
         props = {k: brewery.find(class_=k).text if \
         brewery.find(class_=k) is not None else '' for k in ids }
         props['telephone'] = re.sub('[^0-9+]',"",props['telephone'])
@@ -34,6 +34,7 @@ for country in country_list_items:
             address2 = address1.find_next_sibling('li')
             if address2 is not None:
                 props['address'] = address1.text +' '+ address2.text
+        props['country'] = country['data-country-id']
         db_brewery = Brewery(**props)
         db.session.add(db_brewery)
         db.session.commit()
