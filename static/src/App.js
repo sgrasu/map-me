@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 
@@ -7,7 +6,6 @@ const Map = ReactMapboxGl({
   accessToken: 'pk.eyJ1Ijoic2dyYXN1IiwiYSI6ImNqbGxwOWV5OTB6eHgzcGxkdTRwbmF1MHoifQ.iF-dbH3wdRc0Y_mr4oGDEA'
 });
 
-// or "const mapboxgl = require('mapbox-gl');"
 
 
 class App extends Component {
