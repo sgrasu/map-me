@@ -35,7 +35,11 @@ for country in country_list_items:
             if address2 is not None:
                 props['address'] = props['address'] +' '+ address2.text.split('|')[0]
         props['country'] = country['data-country-id']
-        geolocator = Nominatim(user_agent="brewery-finder")
+        try:
+            geolocator = Nominatim(user_agent="brewery-finder")
+            location = geolocator.geocode(props['address'])
+        except Exception as e:
+            location = ''
         location = geolocator.geocode(props['address'])
         if location is not None: 
             props['latitude'] = location.latitude
