@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import ReactMapGL from 'react-map-gl';
-
+import ReactMapGL, {Marker} from 'react-map-gl';
+import BreweryPin from './BreweryPin';
 class Map extends Component {
 
   state = {
