@@ -1,20 +1,44 @@
 import React, {Component} from 'react';
-
+import ReactMapGL, {Marker} from 'react-map-gl';
+import BreweryPin from './BreweryPin';
 class Map extends Component {
-    componentDidMount() {
-        this.map = new mapboxgl.Map({
-          container: this.mapContainer,
-          style: 'mapbox://styles/mapbox/streets-v9'
-        });
-      }
-    
-      componentWillUnmount() {
-        this.map.remove();
-      }
-    
-      render() {
-    
-        return <div  ref={el => this.mapContainer = el} />;
-      }
+
+  state = {
+    viewport: {
+      width: 500,
+      height: 500,
+      latitude: 37.7577,
+      longitude: -122.4376,
+      zoom: 8
     }
-export default Map;
+  };
+  componentDidMount() {
+    window.addEventListener('resize', this._resize);
+    this._resize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._resize);
+  }
+
+  _resize = () => {
+    this.setState({
+      viewport: {
+        ...this.state.viewport,
+        width: this.props.width || window.innerWidth,
+        height: this.props.height || window.innerHeight
+      }
+    });
+  };
+  render() {
+    return (
+      <ReactMapGL
+      mapboxApiAccessToken = 'pk.eyJ1Ijoic2dyYXN1IiwiYSI6ImNqbGxwOWV5OTB6eHgzcGxkdTRwbmF1MHoifQ.iF-dbH3wdRc0Y_mr4oGDEA'
+
+        {...this.state.viewport}
+        onViewportChange={(viewport) => this.setState({viewport})}
+      />
+    );
+  }
+}
+export default Map
